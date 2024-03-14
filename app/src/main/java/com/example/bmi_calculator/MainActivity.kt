@@ -78,7 +78,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 @Preview
 
-
 fun MyBMIApp( ){
 
     var inputH by remember { mutableStateOf("") }
@@ -108,23 +107,34 @@ fun MyBMIApp( ){
 
     //BMI 결과에 대한 범주 확인
     fun BMICheck(){
-        if (outputBMI_Round >0.0 && outputBMI_Round<18.5 ) {
-            result = "저체중"
+        result = if (outputBMI_Round >0.0 && outputBMI_Round<18.5 ) {
+            "저체중"
         } else if(outputBMI_Round>=18.5 && outputBMI_Round<25){
-            result = "정상"
+            "정상"
 
         }else if(outputBMI_Round>=25 && outputBMI_Round<30){
-            result = "과체중"
+            "과체중"
 
         }else if(outputBMI_Round>=30){
-            result = "비만"
+            "비만"
 
         }else {
-            result = ""
+            ""
 
-            }
         }
+    }
 
+    @Composable
+    fun resultImage(id : Int) {
+        Image(
+            painter = painterResource(id =id),
+            contentDescription = "",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .size(300.dp)
+                .clip(CircleShape)
+        )
+    }
 
 
     Column(
@@ -262,54 +272,23 @@ fun MyBMIApp( ){
         // 비만인 경우 image 4
         when (result) {
             "저체중" -> {
-                Image(
-                    painter = painterResource(id =R.drawable.image1),
-                    contentDescription = "",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .size(300.dp)
-                        .clip(CircleShape)
-                )
+                resultImage(R.drawable.image1)
             }
             "정상" -> {
-                Image(
-                    painter = painterResource(id =R.drawable.image2),
-                    contentDescription = "",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .size(300.dp)
-                        .clip(CircleShape)
-                )
-
+                resultImage(R.drawable.image2)
             }
             "과체중" -> {
-                Image(
-                    painter = painterResource(id =R.drawable.image3),
-                    contentDescription = "",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .size(300.dp)
-                        .clip(CircleShape)
-                )
-
+                resultImage(R.drawable.image3)
             }
             "비만" -> {
-                Image(
-                    painter = painterResource(id =R.drawable.image4),
-                    contentDescription = "",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .size(300.dp)
-                        .clip(CircleShape)
-                )
-
+                resultImage(R.drawable.image4)
             }
             else -> {
                 //아무것도 아닌 경우는 image 없음
             }
         }
 
-        }
+    }
 
 }
 
