@@ -1,26 +1,22 @@
 package com.example.bmi_calculator
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 
 
 class BMIAppViewModel: ViewModel(){
 
-    private var _heightValue = 1.0
-    private var _weightValue = 1.0
+    var inputH  by mutableStateOf("")
+    var inputW  by mutableStateOf("")
+    var BMIResultModel by mutableStateOf("")
+    var outputBMI_RoundModel by mutableStateOf(0.0)
 
-    fun setHeightValue(value: Double){
-        _heightValue = value
+    fun getBMICalResult(){
+        BMIResultModel= BMICalculation(inputH, inputW).BMICalResult().bodyStatus
+        outputBMI_RoundModel = BMICalculation(inputH, inputW).BMICalResult().BMIValue
     }
 
-    fun setWeightValue(value: Double){
-        _weightValue = value
-    }
 
-    fun getBMICalResult():Double {
-        return BMICalculation().BMICalResult(_heightValue,_weightValue)
-    }
-
-    fun getBMICheck():String {
-        return BMICalculation().BMICheck(getBMICalResult())
-    }
 }

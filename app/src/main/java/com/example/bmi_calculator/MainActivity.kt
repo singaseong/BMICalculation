@@ -46,6 +46,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 import com.example.bmi_calculator.ui.theme.BMI_CalculatorTheme
 
@@ -55,7 +56,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            //val viewModel: BMIAppViewModel = viewModel()
+            val viewModel: BMIAppViewModel = viewModel()
 
             BMI_CalculatorTheme {
                 // A surface container using the 'background' color from the theme
@@ -63,7 +64,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MyBMIApp()
+                    MyBMIApp(viewModel)
                 }
             }
         }
@@ -74,6 +75,7 @@ class MainActivity : ComponentActivity() {
 
 
 
+/*
 @SuppressLint("UnrememberedMutableInteractionSource")
 @Composable
 @Preview
@@ -288,8 +290,9 @@ fun MyBMIApp( ){
             }
         }
 
-    }
+        }
 
 }
 
+*/
 
