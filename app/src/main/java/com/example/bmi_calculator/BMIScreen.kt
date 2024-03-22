@@ -1,6 +1,7 @@
 package com.example.bmi_calculator
 
 import android.annotation.SuppressLint
+import android.widget.ScrollView
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -44,6 +45,7 @@ fun MyBMIApp(viewModel: BMIAppViewModel){
 
     val BMIViewModel: BMIAppViewModel = viewModel()
     val focusManager = LocalFocusManager.current // 커서 focus disable, 키보드 hide
+
 
     Column(
         modifier = Modifier
@@ -137,8 +139,8 @@ fun MyBMIApp(viewModel: BMIAppViewModel){
                 viewModel.inputW =""
                 BMIViewModel.inputH = viewModel.inputH
                 BMIViewModel.inputW = viewModel.inputW
-                BMIViewModel.BMIResultModel =""
-                BMIViewModel.outputBMI_RoundModel = 0.0
+                BMIViewModel.BMIResultModel.value =""
+                BMIViewModel.outputBMI_RoundModel.value = 0.0
                 focusManager.clearFocus() // 커서 focus disable, 키보드 hide
                 }
             ){
@@ -148,7 +150,7 @@ fun MyBMIApp(viewModel: BMIAppViewModel){
         //계산 결과값 산출
         Spacer(modifier = Modifier.height(8.dp))
         Text(
-            text = "   BMI Result  : ${BMIViewModel.outputBMI_RoundModel} ${BMIViewModel.BMIResultModel}",
+            text = "   BMI Result  : ${BMIViewModel.outputBMI_RoundModel.value} ${BMIViewModel.BMIResultModel.value}",
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentSize(),
@@ -156,7 +158,7 @@ fun MyBMIApp(viewModel: BMIAppViewModel){
         )
         Spacer(modifier = Modifier.height(8.dp))
 
-         when (BMIViewModel.BMIResultModel) {
+         when (BMIViewModel.BMIResultModel.value) {
             "저체중" -> {
                 ResultImage(R.drawable.image1)
             }
